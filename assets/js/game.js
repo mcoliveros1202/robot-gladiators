@@ -10,7 +10,6 @@ var enemyAttack = 12;
 console.log(enemyNames);
 console.log(enemyNames.length);
 console.log(enemyNames[0]);
-console.log(enemyNames[3]);
 
 //fight function
 var fight = function (enemyName) {
@@ -93,6 +92,16 @@ var startGame = function () {
 
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
+
+      // if we're not at the last enemy in the array
+      if (playerHealth > 0 && i < enemyNames.length - 1) {
+        // ask if player wants to use the store before the next round
+        var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+        // if yes, take them to the store() function
+        if (storeConfirm) {
+          shop();
+        }
+      }
     }
     // if player isn't alive, stope the game
     else {
@@ -103,8 +112,46 @@ var startGame = function () {
 };
 
 // start the game when the page loads
+var shop = function () {
+   // ask player what they would like to do
+   var shopOptionPrompt = window.prompt(
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+  );
+  // use switch to carry out action
+  switch (shopOptionPrompt) {
+
+    case "REFILL": // new case
+    case "refill":
+      window.alert("Refilling player's health by 20 for 7 dollars.");
+      // increase health and decrease money
+      playerHealth = playerHealth + 20;
+      playerMoney = playerMoney - 7;
+      break;
+
+    case "UPGRADE": // new case
+    case "upgrade":
+      window.alert("Upgrading player's attack by 6 for 7 dollars.");
+      // increase attack and decrease money
+      playerAttack = playerAttack + 6;
+      playerMoney = playerMoney - 7;
+      break;
+
+      case "LEAVE": // new case
+      case "leave":
+      window.alert("Leaving the store.");
+      // do nothing, so function will end
+      break;
+      
+    default:
+      window.alert("You did not pick a valid option. Try again.");
+      //call shop() again to force player to pick a valid option
+      shop();
+      break;
+  }
+};
+
 startGame();
-var endGame = function() {
+var endGame = function () {
   // if the player is still alive, player wins!
   if (playerHealth > 0) {
     window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
@@ -125,10 +172,7 @@ var endGame = function() {
 
 endGame();
 
-// allow player to choose whether to play game again
-// once the game ends, ask if player would like to play again- requires loop?: startGame() function;
-// if yes, start back at the beginning
-// if no, end game: endGame() function; this alerts player to stats, asks to play again, if yes, call startGame()
+startGame();
 
 // provide access to a shop for player to purchase HEALTH, ATTACK, or to leave shop
 // at the end of each round (if there are more enemies), provide opportunity for player to go to shop-- if yes, shop() function -- if no, continue to next round.
