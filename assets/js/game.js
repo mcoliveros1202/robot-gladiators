@@ -21,13 +21,13 @@ var fight = function (enemyName) {
     // if player chooses to skip
     if (promptFight === "skip" || promptFight === "SKIP") {
       // confirm player wants to skip
-      var confirmSkip = windown.confirm("Are you sure you'd like to quit?");
+      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
       // if yes (true), leave fight
       if (confirmSkip) {
         window.alert(playerName + " has decide to skip this fight. Goodbye!");
         // subtract money from playerMoney for skipping
-        playerMoney = playerMoney - 2;
+        playerMoney = playerMoney - 10;
         console.log("playerMoney", playerMoney);
         break;
       }
@@ -94,3 +94,13 @@ for (var i = 0; i < enemyNames.length; i++) {
     break;
   }
 }
+
+// allow player to choose whether to play game again
+// once the game ends, ask if player would like to play again- requires loop?: startGame() function;
+// if yes, start back at the beginning
+// if no, end game: endGame() function; this alerts player to stats, asks to play again, if yes, call startGame()
+
+// provide access to a shop for player to purchase HEALTH, ATTACK, or to leave shop
+// at the end of each round (if there are more enemies), provide opportunity for player to go to shop-- if yes, shop() function -- if no, continue to next round.
+// prompt with window.prompt what they would like to do: purchase health REFILL (subtact money and add health points), UPGRADE attack (subtact money, add attack power), or LEAVE shop (alert goodbye and start fight() function); if an invalid option is selected, call shop() fn again.
+// from shop, start next round of fighting
