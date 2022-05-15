@@ -220,6 +220,3 @@ console.log(enemyInfo[0].name);
 console.log(enemyInfo[0]['attack']);
 
 startGame();
-
-// convert player and enemy data to custom objects
-// merge the object branch and update main
